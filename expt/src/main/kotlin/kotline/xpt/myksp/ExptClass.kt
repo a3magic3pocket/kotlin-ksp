@@ -1,4 +1,4 @@
-package kotline.xpt
+package kotline.xpt.myksp
 
 import kotlink.sp.MyAnnotation
 
