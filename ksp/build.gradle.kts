@@ -2,8 +2,7 @@ plugins {
 	val kotlinVersion = "2.1.10"
 	val kspVersion = "2.1.10-1.0.31"
 
-	kotlin("jvm") version "1.9.25"
-	kotlin("kapt") version kotlinVersion
+	kotlin("jvm") version kotlinVersion
 	id("com.google.devtools.ksp") version kspVersion
 }
 
