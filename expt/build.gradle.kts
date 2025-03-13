@@ -45,6 +45,13 @@ dependencies {
 	// KSP API를 사용하는 코드에서 사용할 의존성
 	implementation(project(":ksp"))
 	ksp(project(":ksp"))
+
+	// QueryDSL ksp 관련 의존성
+	implementation("com.querydsl:querydsl-core:5.1.0")
+	implementation("com.querydsl:querydsl-jpa:5.1.0")
+	implementation(project(":querydsl-ksp"))
+	ksp(project(":querydsl-ksp"))
+
 }
 
 kotlin {
