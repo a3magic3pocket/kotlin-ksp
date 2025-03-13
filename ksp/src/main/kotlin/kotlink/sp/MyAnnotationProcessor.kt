@@ -20,7 +20,7 @@ class MyAnnotationProcessor(
         // 애너테이션이 달린 클래스에 대한 코드 생성
         symbols.filterIsInstance<KSClassDeclaration>().forEach { classDeclaration ->
             val annotation =
-                classDeclaration.annotations.find { it.annotationType.resolve().declaration.qualifiedName?.asString() == "com.example.MyAnnotation" }
+                classDeclaration.annotations.find { it.annotationType.resolve().declaration.qualifiedName?.asString() == "kotlink.sp.MyAnnotation" }
             val value = annotation?.arguments?.firstOrNull()?.value as? String ?: "defaultValue"
 
             // 생성할 소스 파일 이름은 class 이름 + ".Generated.kt"
