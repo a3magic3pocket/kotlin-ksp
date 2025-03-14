@@ -13,6 +13,9 @@ plugins {
 
 	// ksp
 	id("com.google.devtools.ksp") version kspVersion
+
+	// kapt(alpha)
+	kotlin("kapt") version kotlinVersion // JPA 플러그인 추가
 }
 
 group = "kotlink"
@@ -37,20 +40,32 @@ dependencies {
 	implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
 
 	// H2 Database
-	runtimeOnly("com.h2database:h2")
+	implementation("com.h2database:h2")
 
 	// Kotlin + JPA 호환성
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+	// kotlin test
+	testImplementation(kotlin("test"))
 
 	// KSP API를 사용하는 코드에서 사용할 의존성
 	implementation(project(":ksp"))
 	ksp(project(":ksp"))
 
 	// QueryDSL ksp 관련 의존성
-	implementation("com.querydsl:querydsl-core:5.1.0")
-	implementation("com.querydsl:querydsl-jpa:5.1.0")
+//	implementation("com.querydsl:querydsl-core:5.1.0")
+//	implementation("com.querydsl:querydsl-jpa:5.1.0")
+	implementation("io.github.openfeign.querydsl:querydsl-core:6.10.1")
+	implementation("io.github.openfeign.querydsl:querydsl-jpa:6.10.1")
 	implementation(project(":querydsl-ksp"))
 	ksp(project(":querydsl-ksp"))
+
+//	val querydslVersion = "6.10.1"
+//	kapt("io.github.openfeign.querydsl:querydsl-apt:$querydslVersion")
+//	compileOnly("io.github.openfeign.querydsl:querydsl-apt:$querydslVersion:jpa")
+
+	// assertj-core 의존성 추가
+	testImplementation("org.assertj:assertj-core:3.24.2")
 
 }
 
