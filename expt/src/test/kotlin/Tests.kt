@@ -1,7 +1,6 @@
 import com.querydsl.jpa.impl.JPAQueryFactory
 import jakarta.persistence.EntityManagerFactory
-import kotline.xpt.querydslksp.dto.QUserDto
-import kotline.xpt.querydslksp.dto.UserDto
+import kotline.xpt.querydslksp.dto.*
 import kotline.xpt.querydslksp.entity.QUser
 import kotline.xpt.querydslksp.entity.User
 import org.hibernate.cfg.AvailableSettings
@@ -31,8 +30,42 @@ class Tests {
             val em = emf.createEntityManager()
             val queryFactory = JPAQueryFactory(em)
             val q = QUser.user
-            val userDto: UserDto? = queryFactory
-                .select(QUserDto(
+            val userDto: UserDataClassConstructorDto? = queryFactory
+                .select(QUserDataClassConstructorDto(
+                    q.id,
+                    q.name
+                ))
+                .from(q)
+                .fetchOne()
+            assertNotNull(userDto)
+            assertThat(userDto.id).isEqualTo(1)
+            assertThat(userDto.name).isEqualTo("John Smith")
+            em.close()
+        }
+
+        run {
+            val em = emf.createEntityManager()
+            val queryFactory = JPAQueryFactory(em)
+            val q = QUser.user
+            val userDto: UserClassConstructorDto? = queryFactory
+                .select(QUserClassConstructorDto(
+                    q.id,
+                    q.name
+                ))
+                .from(q)
+                .fetchOne()
+            assertNotNull(userDto)
+            assertThat(userDto.id).isEqualTo(1)
+            assertThat(userDto.name).isEqualTo("John Smith")
+            em.close()
+        }
+
+        run {
+            val em = emf.createEntityManager()
+            val queryFactory = JPAQueryFactory(em)
+            val q = QUser.user
+            val userDto: UserClassDto? = queryFactory
+                .select(QUserClassDto(
                     q.id,
                     q.name
                 ))
